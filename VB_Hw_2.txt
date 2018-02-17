@@ -1,0 +1,44 @@
+Sub addstocks()
+
+'I lost my cold somehow and this is all that I could come up with with the time I had
+'sorry :(
+
+' Set an initial variable for holding the stocks
+Dim stockName As String
+'Holds the number of stocks
+Dim totalStocks As Double
+totalStocks = 0
+'Keeps track of the location
+Dim stockRow As Integer
+stockRow = 2
+  
+  
+For Each ws In Worksheets
+
+' Loop through all stocks
+    For i = 2 To ws.Cells(Rows.Count, 1).End(xlUp).Row
+        
+        'CHecks to see if we are in the same stock
+        If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+
+            stockName = ws.Cells(i, 1).Value
+            ws.Range("J" & stockRow).Value = stockName
+            ws.Range("K" & stockRow).Value = totalStocks
+        
+            stockRow = stockRow + 1
+          
+            totalStocks = 0
+            
+        Else
+        
+            totalStocks = totalStocks + Range(i, 7)
+            
+        End If
+
+    Next i
+    Next ws
+
+End Sub
+
+
+
